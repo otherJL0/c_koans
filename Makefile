@@ -1,22 +1,16 @@
-CC := gcc
+CC := clang
 SRCDIR := src
 BINDIR := bin
 BLDDIR := build
-INCDIR := include
 
 ALL_SRCF := $(shell find $(SRCDIR) -type f -name *.c)
 ALL_OBJF := $(patsubst $(SRCDIR)/%,$(BLDDIR)/%,$(ALL_SRCF:.c=.o))
 #MAINF := # use nm to find file with main and include it
 #FUNCF := $(filter-out $(MAIN_FILES), $(ALL_OBJF))
 
-INC := -I $(INCDIR)
-
 EXEC := c_koans
 
-STD := gnu11
-CFLAGS := -std=$(STD) -Wall -Werror -Wno-unused-function -Wno-nonnull
-
-CRITERION := -lcriterion
+CFLAGS := $(shell cat compile_flags.txt)
 
 .PHONY: setup all clean
 
